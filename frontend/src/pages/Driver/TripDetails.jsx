@@ -198,7 +198,7 @@ const TripDetails = () => {
           </Link>
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl flex items-center gap-2">
             <Compass className="h-7 w-7 text-blue-500" />
-            Trip to {trip.destination}
+            Trip: {trip.origin} → {trip.destination}
           </h1>
         </div>
 

@@ -3,22 +3,25 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { User, Driver, AuditLog } = require('../models');
-const { protect } = require('../middleware/auth');
+const { protect, admin } = require('../middleware/auth');
 const { upload, handleReceiptUpload } = require('../middleware/upload');
 
 // Helper to generate JWT
 const generateToken = (user) => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured');
+  }
   return jwt.sign(
     { id: user.id, role: user.role },
-    process.env.JWT_SECRET || 'manivtha_tours_travels_super_secret_key_2026',
+    process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRY || '30d' }
   );
 };
 
 // @desc    Register a new user (Usually Admin setup or Driver login creation)
 // @route   POST /api/auth/register
-// @access  Public (for initial setup)
-router.post('/register', async (req, res) => {
+// @access  Private/Admin
+router.post('/register', protect, admin, async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
@@ -100,8 +103,8 @@ router.get('/me', protect, async (req, res) => {
 
 // @desc    Reset password (For demo purposes: directly update password if authorized or via admin)
 // @route   POST /api/auth/reset-password
-// @access  Public/Private
-router.post('/reset-password', async (req, res) => {
+// @access  Private/Admin
+router.post('/reset-password', protect, admin, async (req, res) => {
   const { email, newPassword } = req.body;
 
   try {

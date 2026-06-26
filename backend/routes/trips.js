@@ -25,10 +25,11 @@ router.get('/', protect, async (req, res) => {
       whereClause.status = status;
     }
 
-    // Search by destination or vehicle number
+    // Search by destination, origin, or vehicle number
     if (search) {
       whereClause[Op.or] = [
         { destination: { [Op.like]: `%${search}%` } },
+        { origin: { [Op.like]: `%${search}%` } },
         { vehicleNumber: { [Op.like]: `%${search}%` } }
       ];
     }
@@ -82,7 +83,7 @@ router.get('/:id', protect, async (req, res) => {
 // @route   POST /api/trips
 // @access  Private/Admin
 router.post('/', protect, admin, async (req, res) => {
-  const { driverId, destination, startDate, endDate, vehicleNumber, advanceAmount } = req.body;
+  const { driverId, origin, destination, startDate, endDate, vehicleNumber, advanceAmount } = req.body;
 
   try {
     const driver = await Driver.findByPk(driverId);
@@ -92,6 +93,7 @@ router.post('/', protect, admin, async (req, res) => {
 
     const trip = await Trip.create({
       driverId,
+      origin,
       destination,
       startDate,
       endDate,
@@ -126,7 +128,7 @@ router.post('/', protect, admin, async (req, res) => {
 // @route   PUT /api/trips/:id
 // @access  Private/Admin
 router.put('/:id', protect, admin, async (req, res) => {
-  const { driverId, destination, startDate, endDate, vehicleNumber, advanceAmount, status } = req.body;
+  const { driverId, origin, destination, startDate, endDate, vehicleNumber, advanceAmount, status } = req.body;
 
   try {
     const trip = await Trip.findByPk(req.params.id);
@@ -142,6 +144,7 @@ router.put('/:id', protect, admin, async (req, res) => {
     const originalDriverId = trip.driverId;
 
     trip.driverId = driverId || trip.driverId;
+    trip.origin = origin || trip.origin;
     trip.destination = destination || trip.destination;
     trip.startDate = startDate || trip.startDate;
     trip.endDate = endDate || trip.endDate;

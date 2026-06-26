@@ -63,6 +63,11 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
   }
+  
+  /* Fix inputs in dark mode having black text */
+  input, select, textarea {
+    color: hsl(var(--foreground));
+  }
 }
 
 /* Custom Scrollbar for premium feel */

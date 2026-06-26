@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import { formatDate, formatCurrency, capitalize } from '../../utils/formatters';
+import { supabase } from '../../utils/supabase';
 import { Eye, Check, X, FileImage, ClipboardList, RefreshCw } from 'lucide-react';
 
 const Expenses = () => {
@@ -27,6 +28,22 @@ const Expenses = () => {
 
   useEffect(() => {
     fetchPendingExpenses();
+    
+    // Set up Realtime subscription if Supabase is configured
+    if (supabase) {
+      const expenseSubscription = supabase
+        .channel('public:Expenses')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'Expenses' }, (payload) => {
+          // A new expense was added, fetch the latest to get full relations (Driver, Trip)
+          // Or just show a toast, but refetching is safest to get joined data
+          fetchPendingExpenses();
+        })
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(expenseSubscription);
+      };
+    }
   }, []);
 
   const handleOpenPreview = (expense) => {

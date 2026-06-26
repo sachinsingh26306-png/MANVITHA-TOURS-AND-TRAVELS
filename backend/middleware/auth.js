@@ -13,7 +13,10 @@ const protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
 
       // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'manivtha_tours_travels_super_secret_key_2026');
+      if (!process.env.JWT_SECRET) {
+        throw new Error('JWT_SECRET is not configured');
+      }
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Get user from the token and attach to request
       const user = await User.findByPk(decoded.id, {

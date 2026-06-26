@@ -73,6 +73,7 @@ const seedDatabase = async () => {
     // Trip 1: Ramesh - Bangalore to Goa (Settled)
     const trip1 = await Trip.create({
       driverId: driverProfile1.id,
+      origin: 'Bangalore',
       destination: 'Goa',
       startDate: '2026-05-10',
       endDate: '2026-05-15',
@@ -84,6 +85,7 @@ const seedDatabase = async () => {
     // Trip 2: Suresh - Bangalore to Chennai (Completed, Settlement Pending)
     const trip2 = await Trip.create({
       driverId: driverProfile2.id,
+      origin: 'Bangalore',
       destination: 'Chennai',
       startDate: '2026-05-20',
       endDate: '2026-05-24',
@@ -95,6 +97,7 @@ const seedDatabase = async () => {
     // Trip 3: Ramesh - Bangalore to Mumbai (Active/In-Progress)
     const trip3 = await Trip.create({
       driverId: driverProfile1.id,
+      origin: 'Bangalore',
       destination: 'Mumbai',
       startDate: '2026-06-08',
       endDate: '2026-06-14',
@@ -106,6 +109,7 @@ const seedDatabase = async () => {
     // Trip 4: Vikram - Bangalore to Hyderabad (Pending/Upcoming)
     const trip4 = await Trip.create({
       driverId: driverProfile3.id,
+      origin: 'Bangalore',
       destination: 'Hyderabad',
       startDate: '2026-06-15',
       endDate: '2026-06-18',

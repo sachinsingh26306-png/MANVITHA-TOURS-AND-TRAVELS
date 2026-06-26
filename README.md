@@ -33,22 +33,30 @@ A professional, full-stack web application that digitizes and centralizes the co
 
 ---
 
-## 🛠️ Technology Stack
+## 🏗️ Architecture Overview
 
-- **Frontend**: React.js, Tailwind CSS v4, React Router DOM, Recharts (visual analytics), Lucide React (icons)
-- **Backend**: Node.js, Express.js
-- **Database ORM**: Sequelize (supporting SQLite & MySQL)
-- **Authentication**: JWT, bcryptjs
-- **File Upload**: Multer, Cloudinary (with automatic local filesystem fallback)
+The application follows a standard Client-Server architecture:
+
+- **Frontend**: React.js with Vite, Tailwind CSS v4. Communicates with backend via REST API.
+- **Backend**: Node.js + Express API server.
+- **Database**: SQLite (default for development/demo) or PostgreSQL/MySQL. Sequelize ORM handles data modeling.
+- **Storage**: Local filesystem storage with built-in Cloudinary and Supabase fallback mechanisms for file uploads (receipts/avatars).
+
+### Data Flow
+1. Drivers log expenses (with receipt uploads) during active trips.
+2. The trip is marked as "Completed" and a Settlement is requested.
+3. Admins review expenses (approving/rejecting line items).
+4. The system calculates the net settlement balance based on the trip's advance amount and approved expenses.
+5. Admins approve the settlement, finalizing the ledger.
 
 ---
 
 ## 💻 Quick Start (Local Setup)
 
-Follow these steps to run the application locally on your Windows environment.
+Follow these steps to run the application locally on your Windows/Linux/Mac environment.
 
 ### Prerequisites
-Make sure you have **Node.js** (v18+) and **npm** installed.
+- **Node.js** (v18+) and **npm**
 
 ### 1. Install Dependencies
 Run the installation script from the root workspace directory to install dependencies for the root, frontend, and backend packages:
@@ -56,14 +64,28 @@ Run the installation script from the root workspace directory to install depende
 npm run install-all
 ```
 
-### 2. Seed Sample Database
+### 2. Environment Variables
+Copy the `.env.example` files to `.env` in both the `backend` and `frontend` directories:
+
+In `backend/`:
+```bash
+cp .env.example .env
+```
+Ensure you set a strong `JWT_SECRET` in `backend/.env`.
+
+In `frontend/`:
+```bash
+cp .env.example .env
+```
+
+### 3. Seed Sample Database
 Initialize and seed the database with mock records (Admins, Drivers, Trips, and verified/pending Expenses) for immediate dashboard visualization:
 ```bash
 npm run seed --prefix backend
 ```
 *(This creates a local `database.sqlite` file in the backend directory. Zero database setup is needed to start).*
 
-### 3. Start Development Servers
+### 4. Start Development Servers
 Run the concurrent dev command to spin up the Express API server (port 5000) and the Vite + React dev server (port 3000) simultaneously:
 ```bash
 npm run dev
@@ -86,27 +108,32 @@ Use the following pre-seeded logins to test the user role workflows:
 
 ---
 
-## 🗄️ Database Adaptability (SQLite 🔄 MySQL)
+## 🚀 Deployment (Vercel)
 
-By default, the application runs on **SQLite** to make local evaluations seamless. To transition to **MySQL** for staging or production, simply modify the `backend/.env` file:
+To deploy this full-stack application on Vercel:
 
-1. Change `DB_DIALECT` to `mysql`:
-   ```env
-   DB_DIALECT=mysql
-   ```
-2. Uncomment and configure the MySQL server credentials:
-   ```env
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASS=your_mysql_password
-   DB_NAME=manivtha_travels
-   DB_PORT=3306
-   ```
-3. Run the database seed script again to sync the schemas and seed table records:
-   ```bash
-   npm run seed --prefix backend
-   ```
-   The Sequelize ORM will automatically create the database tables (`Users`, `Drivers`, `Trips`, `Expenses`, `Settlements`, `Notifications`, `AuditLogs`) inside your MySQL server.
+1. Push your repository to GitHub.
+2. In the Vercel dashboard, import the project.
+3. Configure the following build settings:
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+4. Set your Environment Variables in Vercel settings (e.g., `VITE_API_URL` pointing to your hosted backend).
+5. For the backend, you can either host it on a service like Render/Railway/Heroku or configure it as Vercel Serverless Functions. If hosting separately, ensure CORS is properly configured in the backend's `CORS_ORIGIN` env variable.
+6. Deploy!
+
+---
+
+## 🗄️ Database Adaptability
+
+By default, the application runs on **SQLite** to make local evaluations seamless. To transition to **MySQL** or **PostgreSQL** for staging or production, simply modify the `backend/.env` file:
+
+```env
+DB_DIALECT=postgres
+DATABASE_URL=postgresql://user:password@host:5432/dbname
+```
+Run the database seed script again to sync the schemas and seed table records.
 
 ---
 
@@ -121,3 +148,11 @@ CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 The server dynamically checks for these keys. When present, receipt images are automatically uploaded to Cloudinary, and the local temporary files are deleted. If the keys are missing or invalid, the server automatically falls back to local storage, keeping the app completely functional.
+
+---
+
+## 📄 License
+ISC License
+
+## 👨‍💻 Author
+Saggam Abhilash

@@ -1,16 +1,14 @@
 {
-  "name": "internship",
+  "name": "manivtha-tours-expenses",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Outstation Trip Advance Expense Settlement System for Manivtha Tours & Travels",
   "scripts": {
-    "predev": "kill-port 5000",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "backend": "cd backend && npm run dev",
     "frontend": "cd frontend && npm run dev",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
-  "keywords": [],
-  "author": "",
+  "author": "Saggam Abhilash",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^8.2.2"
