@@ -28,10 +28,18 @@ app.use('/api/settlements', require('./routes/settlements'));
 app.use('/api/reports', require('./routes/reports'));
 app.use('/api/notifications', require('./routes/notifications'));
 
-// Root path test endpoint
-app.get('/', (req, res) => {
-  res.json({ message: 'Manivtha Tours & Travels Expense System API is running...' });
-});
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+  });
+} else {
+  // Root path test endpoint
+  app.get('/', (req, res) => {
+    res.json({ message: 'Manivtha Tours & Travels Expense System API is running...' });
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
