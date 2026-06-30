@@ -39,8 +39,50 @@ The application follows a standard Client-Server architecture:
 
 - **Frontend**: React.js with Vite, Tailwind CSS v4. Communicates with backend via REST API.
 - **Backend**: Node.js + Express API server.
-- **Database**: SQLite (default for development/demo) or PostgreSQL/MySQL. Sequelize ORM handles data modeling.
+- **Database**: SQLite (default for development/demo) or Supabase (PostgreSQL) for production. Sequelize ORM handles data modeling.
 - **Storage**: Local filesystem storage with built-in Cloudinary and Supabase fallback mechanisms for file uploads (receipts/avatars).
+## 📁 Project Structure
+
+The repository is organised as follows:
+
+```
+frontend/
+├─ src/
+│  ├─ components/
+│  ├─ pages/
+│  ├─ context/
+│  └─ utils/
+├─ public/
+├─ vite.config.js
+└─ index.html
+backend/
+├─ routes/
+├─ models/
+├─ middleware/
+│   ├─ auth.js
+│   └─ upload.js
+├─ config/
+│   └─ database.js
+├─ server.js
+└─ seed.js
+database.sqlite
+package.json
+README.md
+```
+
+- **frontend/** – React Vite front‑end.
+  - `src/` – source code (components, pages, context, utils).
+  - `public/` – static assets.
+  - `vite.config.js` – Vite configuration.
+- **backend/** – Express API server.
+  - `routes/` – API route definitions.
+  - `models/` – Sequelize models.
+  - `middleware/` – authentication & upload handling.
+  - `config/database.js` – DB connection setup.
+  - `server.js` – entry point.
+- **database.sqlite** – local SQLite database (sample data).
+- **package.json** – workspace scripts (`install-all`, `dev`, `seed`, etc.).
+- **README.md** – project documentation.
 
 ### Data Flow
 1. Drivers log expenses (with receipt uploads) during active trips.

@@ -171,7 +171,7 @@ const Trips = () => {
               placeholder="Search destination or vehicle number..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2 pl-10 pr-4 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2 pl-10 pr-4 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:bg-zinc-800"
             />
           </div>
 
@@ -185,7 +185,7 @@ const Trips = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2 text-xs font-bold outline-none focus:border-blue-500 dark:border-zinc-800 dark:bg-zinc-950/40"
+              className="rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2 text-xs font-bold outline-none focus:border-blue-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
             >
               <option value="">All Statuses</option>
               <option value="pending">Pending/Upcoming</option>
@@ -329,7 +329,7 @@ const Trips = () => {
                     required
                     value={driverId}
                     onChange={(e) => setDriverId(e.target.value)}
-                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:bg-zinc-800"
                   >
                     {drivers.length === 0 ? (
                       <option value="">No Active Drivers Available</option>
@@ -351,7 +351,7 @@ const Trips = () => {
                     required
                     value={origin}
                     onChange={(e) => setOrigin(e.target.value)}
-                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:bg-zinc-800"
                     placeholder="e.g. Mumbai, Delhi"
                   />
                 </div>
@@ -362,7 +362,7 @@ const Trips = () => {
                     required
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:bg-zinc-800"
                     placeholder="e.g. Goa, Hyderabad"
                   />
                 </div>
@@ -379,7 +379,7 @@ const Trips = () => {
                       required
                       value={vehicleNumber}
                       onChange={(e) => setVehicleNumber(e.target.value)}
-                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-mono outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-mono outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:bg-zinc-800"
                       placeholder="KA-01-XX-9999"
                     />
                   </div>
@@ -394,7 +394,7 @@ const Trips = () => {
                       required
                       value={advanceAmount}
                       onChange={(e) => setAdvanceAmount(e.target.value)}
-                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-bold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm font-bold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:bg-zinc-800"
                       placeholder="e.g. 15000"
                     />
                   </div>
@@ -412,7 +412,7 @@ const Trips = () => {
                       required
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
-                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:bg-zinc-800"
                     />
                   </div>
                 </div>
@@ -425,7 +425,7 @@ const Trips = () => {
                       required
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
-                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                      className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:bg-zinc-800"
                     />
                   </div>
                 </div>
@@ -437,7 +437,7 @@ const Trips = () => {
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 px-4 text-sm font-bold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-800 dark:bg-zinc-950/40"
+                    className="block w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 px-4 text-sm font-bold outline-none focus:border-blue-500 focus:bg-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:bg-zinc-800"
                   >
                     <option value="pending">Pending</option>
                     <option value="active">Active (On Trip)</option>
